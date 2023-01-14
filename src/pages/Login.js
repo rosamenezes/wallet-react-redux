@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { login } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -27,6 +30,13 @@ class Login extends React.Component {
     }
   };
 
+  handleEntrar = () => {
+    const { email } = this.state;
+    const { history, dispatch } = this.props;
+    dispatch(login(email));
+    history.push('/carteira');
+  };
+
   render() {
     const { isDisabled, email, password } = this.state;
     return (
@@ -51,6 +61,7 @@ class Login extends React.Component {
         <button
           type="button"
           disabled={ isDisabled }
+          onClick={ this.handleEntrar }
         >
           Entrar
         </button>
@@ -59,4 +70,11 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
+export default connect()(Login);
