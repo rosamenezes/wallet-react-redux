@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 class Header extends Component {
   render() {
     const { email } = this.props;
+    console.log(email);
     return (
       <div>
         <h2 data-testid="total-field">0</h2>
@@ -15,12 +16,12 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
-  email: Proptypes.string,
-}.isRequired;
-
 const mapStateToProps = (state) => ({
   email: state.user.email,
 });
+
+Header.propTypes = {
+  email: Proptypes.string,
+}.isRequired;
 
 export default connect(mapStateToProps)(Header);
