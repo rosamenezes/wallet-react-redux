@@ -29,6 +29,7 @@ class WalletForm extends Component {
     const { id, value, currency, method, tag, description } = this.state;
     const { dispatch } = this.props;
     const obj = await fetchAPI();
+    delete obj.USDT;
     dispatch(saveExpenses({
       id,
       value,
@@ -89,9 +90,9 @@ class WalletForm extends Component {
                 onChange={ this.handleChangeInput }
                 name="method"
               >
-                <option value="valor1">Dinheiro</option>
-                <option value="valor2">Cartão de crédito</option>
-                <option value="valor3">Cartão de débito</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Cartão de crédito">Cartão de crédito</option>
+                <option value="Cartão de débito">Cartão de débito</option>
               </select>
             </label>
             <label htmlFor="categoria">
@@ -103,11 +104,11 @@ class WalletForm extends Component {
                 onChange={ this.handleChangeInput }
                 name="tag"
               >
-                <option value="valor1">Alimentação</option>
-                <option value="valor2">Lazer</option>
-                <option value="valor3">Trabalho</option>
-                <option value="valor4">Transporte</option>
-                <option value="valor5">Saúde</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Saúde">Saúde</option>
               </select>
             </label>
             <label htmlFor="descricao">
