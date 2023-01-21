@@ -3,6 +3,7 @@ export const FETCH_CURRENCIES = 'FETCH_CURRENCIES';
 export const FETCH_CURRENCIES_SUCCESS = 'FETCH_CURRENCIES_SUCCESS';
 export const FETCH_CURRENCIES_FAIL = 'FETCH_CURRENCIES+FAIL';
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
+export const DELETE_EXP = 'DELETE_EXP';
 
 export const userEmail = (email) => ({
   type: USER_EMAIL,
@@ -38,5 +39,10 @@ export const fetchCurrenciesThunk = () => async (dispatch) => {
 
 export const saveExpenses = (expenses) => ({
   type: SAVE_EXPENSES,
+  expenses,
+});
+
+export const expDel = (expenses) => ({
+  type: DELETE_EXP,
   expenses,
 });

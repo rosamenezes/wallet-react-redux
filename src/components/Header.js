@@ -8,7 +8,7 @@ class Header extends Component {
     return (
       <div>
         {expenses.length === 0 ? (
-          <h2 data-testid="total-field">0</h2>
+          <h2 data-testid="total-field">0.00</h2>
         ) : (
           <h2 data-testid="total-field">
             {expenses.reduce((acc, { currency, value, exchangeRates }) => (
