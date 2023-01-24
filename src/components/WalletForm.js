@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { saveExpenses, fetchCurrenciesThunk, saveEdited } from '../redux/actions';
+import { saveExpenses, fetchCurrenciesThunk } from '../redux/actions';
 import fetchAPI from '../services/api';
 
 const alimentacao = 'Alimentação';
@@ -32,22 +32,16 @@ class WalletForm extends Component {
     const { dispatch } = this.props;
     const obj = await fetchAPI();
     delete obj.USDT;
-    dispatch(
-      saveExpenses({
-        id,
-        value,
-        currency,
-        method,
-        tag,
-        description,
-        exchangeRates: obj,
-      }),
-    );
+    dispatch(saveExpenses({
+      id,
+      value,
+      currency,
+      method,
+      tag,
+      description,
+      exchangeRates: obj,
+    }));
     this.setState({ id: id + 1 });
-    this.handleReset();
-  };
-
-  handleReset = () => {
     this.setState({
       value: '',
       description: '',
@@ -57,26 +51,26 @@ class WalletForm extends Component {
     });
   };
 
-  editFunc = (event) => {
-    const { dispatch, idEdit, expenses } = this.props;
-    event.preventDefault();
-    const { value, description, method, tag, currency } = this.state;
-    const editExpense = {
-      id: idEdit[0].id,
+  editInfos = async () => {
+    const { dispatch, editId } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    const obj = await fetchAPI();
+    dispatch(saveEdited({
+      id: editId[0],
       value,
-      description,
-      method,
       currency,
+      method,
       tag,
-      exchangeRates: idEdit[0].exchangeRates,
-    };
-    const newExpenses = expenses.map((expense) => {
-      if (expense.id === editExpense.id) {
-        return editExpense;
-      }
-      return expense;
+      description,
+      exchangeRates: obj,
+    }));
+    this.setState({
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: alimentacao,
     });
-    dispatch(selectToEdit(newExpenses));
   };
 
   render() {
@@ -153,7 +147,7 @@ class WalletForm extends Component {
               />
             </label>
             {edit ? (
-              <button type="button" onClick={ () => this.editFunc() }>
+              <button type="button" onClick={ () => this.editInfos() }>
                 Editar despesa
               </button>
             ) : (
