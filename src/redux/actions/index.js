@@ -4,7 +4,7 @@ export const FETCH_CURRENCIES_SUCCESS = 'FETCH_CURRENCIES_SUCCESS';
 export const FETCH_CURRENCIES_FAIL = 'FETCH_CURRENCIES+FAIL';
 export const SAVE_EXPENSES = 'SAVE_EXPENSES';
 export const DELETE_EXP = 'DELETE_EXP';
-export const EDIT_FORM_MODE = 'EDIT_FORM_MODE';
+export const EDIT_MODE = 'EDIT_FORM_MODE';
 export const SAVE_EDITED = 'SAVE_EDITED';
 
 export const userEmail = (email) => ({
@@ -50,7 +50,7 @@ export const expDel = (expenses) => ({
 });
 
 export const editFormMode = (payload) => ({
-  type: EDIT_FORM_MODE,
+  type: EDIT_MODE,
   payload,
 });
 

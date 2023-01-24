@@ -1,7 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { DELETE_EXP,
   FETCH_CURRENCIES_SUCCESS,
-  SAVE_EXPENSES, EDIT_FORM_MODE, SAVE_EDITED } from '../actions';
+  SAVE_EXPENSES, EDIT_MODE, SAVE_EDITED } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -26,7 +26,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     return { ...state,
       expenses: state.expenses
         .filter((expense) => expense.description !== action.expenses) };
-  case EDIT_FORM_MODE:
+  case EDIT_MODE:
     return {
       ...state,
       editor: !state.editor,
@@ -35,8 +35,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case SAVE_EDITED:
     return {
       ...state,
-      expenses: state.expenses
-        .map((expense) => (expense.id === state.idEdit ? action.payload : expense)),
+      expenses: action.payload,
       editor: !state.editor,
     };
   default:
