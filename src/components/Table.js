@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { expDel } from '../redux/actions';
+import { expDel, editFormMode } from '../redux/actions';
 
 class Table extends Component {
+  state = {
+    ItenEdit: 0,
+  };
+
+  idFromItenEdit = (id) => {
+    const { dispatch } = this.props;
+    this.setState(
+      {
+        ItenEdit: id,
+      },
+      () => {
+        const { ItenEdit } = this.state;
+        dispatch(editFormMode({ payload: ItenEdit }));
+      },
+    );
+  };
+
   deleteExp = ({ target }) => {
     const { dispatch } = this.props;
     const select = target.parentNode.parentNode.firstChild.innerHTML;
@@ -44,6 +61,8 @@ class Table extends Component {
               <td className="edit-delete">
                 <button
                   type="button"
+                  data-testid="edit-btn"
+                  onClick={ () => this.idFromItenEdit(expenses.id) }
                 >
                   Editar
                 </button>

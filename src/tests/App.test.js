@@ -72,7 +72,7 @@ describe('Testa WalletForm', () => {
     expect(method).toBeInTheDocument();
     expect(tags).toBeInTheDocument();
   });
-  it('testa clicks', () => {
+  it('testa click', () => {
     renderWithRedux(<WalletForm />);
 
     const value = screen.getByTestId('value-input');
